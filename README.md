@@ -26,15 +26,6 @@ class LotoCard {
         System.out.println(); // Переход на новую строку после вывода карточки
     }
 
-    // Метод возвращает количество закрытых и открытых чисел на карточке
-    public int[] countClosedAndOpen() {
-        int closedCount = 0; // Счетчик закрытых чисел
-        for (boolean isClosed : closed) {
-            if (isClosed) closedCount++; // Увеличиваем счетчик, если число закрыто
-        }
-        return new int[]{closedCount, numbers.length - closedCount}; // Возвращаем массив: [количество закрытых, количество открытых]
-    }
-
     // Метод для закрытия указанного числа на карточке
     public boolean closeNumber(int number) {
         for (int i = 0; i < numbers.length; i++) {
@@ -68,13 +59,20 @@ class LotoCard {
 
 public class LotoGame {
 
+    // Метод для создания карточки игрока
+    private static LotoCard createCard(Scanner scanner) {
+        System.out.println("Введите числа для карточки (через пробел):");
+        String[] input = scanner.nextLine().split(" "); // Читаем числа из ввода пользователя
+        int[] numbers = Arrays.stream(input).mapToInt(Integer::parseInt).toArray(); // Преобразуем строки в массив чисел
+        return new LotoCard(numbers); // Возвращаем новую карточку
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); // Сканер для считывания пользовательского ввода
 
         System.out.println("Создание карточек игроков...");
-        // Создаем карточки для двух игроков с заранее заданными числами
-        LotoCard player1 = new LotoCard(new int[]{1, 4, 19, 30, 55});
-        LotoCard player2 = new LotoCard(new int[]{2, 10, 19, 40, 60});
+        LotoCard player1 = createCard(scanner); // Создаем карточку игрока 1
+        LotoCard player2 = createCard(scanner); // Создаем карточку игрока 2
 
         System.out.println("Карточка игрока 1:");
         player1.displayCard(); // Отображаем карточку игрока 1
