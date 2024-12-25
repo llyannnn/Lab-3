@@ -1,5 +1,7 @@
 # Lab-3
 
+
+```
 import java.util.*;
 
 class LotoCard {
@@ -113,3 +115,4 @@ public class LotoGame {
         System.out.println("Количество игроков, закрывших карточку: " + ((player1Wins ? 1 : 0) + (player2Wins ? 1 : 0)));
     }
 }
+```
